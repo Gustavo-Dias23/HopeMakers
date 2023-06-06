@@ -48,7 +48,7 @@ void loop()
   	digitalWrite(13, LOW);
   	delay(200);
   	}
-  	else if (tempC < 23){
+  	else if (tempC < 22){
   	digitalWrite(12, LOW);
   	digitalWrite(13, LOW);
   	digitalWrite(11, HIGH);
