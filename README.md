@@ -16,6 +16,12 @@ Esse projeto está comtemplando o desenvolvimento de um dispositivo que ficaria 
  * Linguagem de programação C;
  * Tinkercad;
 
+ ## ⚙ Instruções
+ * Inicie a simulação do projeto no botão "Iniciar simulação"
+ * Escolha a função desejada utilizando o interruptor deslizante.(A função pode ser trocada no meio do funcionamento quantas vezes quiser)
+ * Caso escolha o monitoramento de temperatura, manipule o sensor de temperatura para ver os diferentes resultados tanto nos leds quanto no LCD.
+ * Caso escolha a balança, manipule o sensor de força para ver os diferentes resultados no LCD, e caso deseje adicionar o peso do item atual ao total pressione o botão.
+
  ## ⚙ Rodando o projeto 
  Para rodar o projeto é necessário entrar neste link:
  https://www.tinkercad.com/things/irSsd3RMA52-hopemakers-gs/editel
