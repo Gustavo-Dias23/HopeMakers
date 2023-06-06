@@ -1,0 +1,96 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(8, 2, 3, 4, 5, 6, 7);
+#define BOTAO A2
+int senpeso = A1;
+const int sentemp = A0;
+int ValorLido= 0;
+double Volts = 0;
+double tempC = 0;
+int estado = 0;
+int peso = 0;
+int pesototal = 0;
+int botao = 0;
+void setup(){
+  pinMode(9 , INPUT);
+  pinMode(BOTAO, INPUT);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  lcd.begin(16,2);              
+  lcd.clear();                  
+  lcd.setCursor(0,2);
+  lcd.print("Peso Total:");
+}
+
+void loop()
+{
+  botao = analogRead(A2); // Leitura de estado botao
+  estado = digitalRead(9); // Leitura de estado switch
+  if (estado == HIGH){
+  	ValorLido = analogRead(sentemp);
+  	Volts = (ValorLido / 1024.0) * 5000; // 5000 para obter em milivolts
+  	float tempC = (Volts-500) * 0.1; // temperatura em Celsius              
+
+  	lcd.setCursor(0,0);     //Print no LCD      
+  	lcd.print("Temp(C):");
+  	lcd.setCursor(8, 0);
+  	lcd.print(tempC);
+  	lcd.print(" ");
+
+
+  	if (tempC < 18){		//Condições para acionar os leds
+  	digitalWrite(11, LOW);
+  	digitalWrite(12, LOW);
+  	digitalWrite(13, HIGH);
+  	delay(200);
+  	digitalWrite(13, LOW);
+  	delay(200);
+  	}
+  	else if (tempC < 23){
+  	digitalWrite(12, LOW);
+  	digitalWrite(13, LOW);
+  	digitalWrite(11, HIGH);
+  	}
+  	else if (tempC > 28 && tempC < 31){
+  	digitalWrite(12, LOW);
+  	digitalWrite(13, LOW);
+  	digitalWrite(11, HIGH);
+  	}
+  	else if (tempC > 31){
+  	digitalWrite(11, LOW);
+  	digitalWrite(12, LOW);
+  	digitalWrite(13, HIGH);
+  	delay(200);
+  	digitalWrite(13, LOW);
+  	delay(200);
+  	}
+  	else{
+  	digitalWrite(11, LOW);
+  	digitalWrite(13, LOW);
+  	digitalWrite(12, HIGH);
+  	}
+  }
+  else{
+  	int peso = analogRead(senpeso);
+  	botao = digitalRead(BOTAO); 
+    	if (botao == HIGH){			//If para adicionar o peso atual no peso total
+      	pesototal = pesototal + peso;	
+      	delay(250);
+   	 }	
+
+  	lcd.setCursor(0,0);
+  	lcd.print("Peso:    ");		//Print no LCD 
+  	lcd.setCursor(9, 0);
+  	lcd.print(peso);
+  	lcd.print(" ");
+  	lcd.setCursor(11,2);
+  	lcd.print(pesototal);
+  	lcd.print("     ");
+  
+
+  
+  
+  }
+}
