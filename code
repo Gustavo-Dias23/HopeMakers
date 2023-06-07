@@ -31,7 +31,7 @@ void loop()
   if (estado == HIGH){
   	ValorLido = analogRead(sentemp);
   	Volts = (ValorLido / 1024.0) * 5000; // 5000 para obter em milivolts
-  	float tempC = (Volts-500) * 0.1; // temperatura em Celsius              
+  	float tempC = (Volts-500) * 0.1; //Converte temperatura em Celsius              
 
   	lcd.setCursor(0,0);     //Print no LCD      
   	lcd.print("Temp(C):");
